@@ -4,10 +4,9 @@ import "../assets/css/nav-footer.css";
 import "../assets/css/login.css";
 import "../assets/css/productos.css";
 
-import logo from "../assets/img/logo.png"; // reemplaza con tu ruta real
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import fotoHome from "../assets/img/foto-home.png";
 
 function Home() {
   return (
@@ -29,7 +28,7 @@ function Home() {
         </div>
         <div className="hero-image">
           <img
-            src="imagenes/newslarge_20220504140959_Best-Products-for-an-Aesthetic-Gaming-Set-Up.jpg"
+            src={fotoHome}
             alt="Setup Gaming NextByte"
           />
         </div>
@@ -50,9 +49,23 @@ function Home() {
               <h3>Teclados</h3>
               <p>Mecánicos y membrane</p>
             </a>
+            <a href="#" className="categoria-card">
+              <div className="categoria-icon">🖱️</div>
+              <h3>Mouses</h3>
+              <p>Precisión para gaming</p>
+
+            </a>
+            <a href="#" className="categoria-card">
+                <div className="categoria-icon">🎧</div>
+                <h3>Audio</h3>
+                <p>Audífonos y parlantes</p>
+            </a>
           </div>
         </div>
       </section>
+
+        {/* PRODUCTOS DESTACADOS
+         */}
 
      <Footer />
     </>

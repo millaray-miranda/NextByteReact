@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/nav-footer.css";
-import logo from "../assets/img/logo.png"; // cambia la ruta si tu logo está en otra carpeta
+import logo from "../assets/img/logo.png"; 
+import "../assets/css/home.css";
 
 const Navbar = () => {
   return (

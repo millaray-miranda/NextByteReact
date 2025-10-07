@@ -1,6 +1,5 @@
 import React from "react";
 import "../assets/css/home.css";
-import "../assets/css/nav-footer.css";
 import "../assets/css/login.css";
 import "../assets/css/productos.css";
 

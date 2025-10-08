@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../assets/css/nav-footer.css";
 import logo from "../assets/img/logo.png"; 
 import "../assets/css/home.css";
@@ -9,6 +10,9 @@ const Navbar = () => {
   const [showRegister, setShowRegister] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(null);
+  
+  // Obtener la ubicación actual para resaltar el link activo
+  const location = useLocation();
 
   // Cargar usuario al iniciar
   useEffect(() => {
@@ -17,6 +21,11 @@ const Navbar = () => {
       setCurrentUser(JSON.parse(savedUser));
     }
   }, []);
+
+  // Función para verificar si un path está activo
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   // Mostrar modal login
   const handleShowLogin = () => {
@@ -35,6 +44,7 @@ const Navbar = () => {
     setShowLogin(false);
     setShowRegister(false);
   };
+  
 
   // Manejar login
   const loginUser = (e) => {
@@ -92,15 +102,42 @@ const Navbar = () => {
       <div className="container">
         <div className="header-content">
           <div className="logo">
-            <img src={logo} alt="NextByte Logo" className="logo-empresa" />
+            <Link to="/">
+              <img src={logo} alt="NextByte Logo" className="logo-empresa" />
+            </Link>
           </div>
 
           <nav className="main-nav">
-            <a href="#" className="nav-link active">Home</a>
-            <a href="#" className="nav-link">Productos</a>
-            <a href="#" className="nav-link">Nosotros</a>
-            <a href="#" className="nav-link">Blogs</a>
-            <a href="#" className="nav-link">Contacto</a>
+            <Link 
+              to="/" 
+              className={`nav-link ${isActive('/') ? 'active' : ''}`}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/productos" 
+              className={`nav-link ${isActive('/Productos') ? 'active' : ''}`}
+            >
+              Productos
+            </Link>
+            <Link 
+              to="/nosotros" 
+              className={`nav-link ${isActive('/Nosotros') ? 'active' : ''}`}
+            >
+              Nosotros
+            </Link>
+            <Link 
+              to="/blogs" 
+              className={`nav-link ${isActive('/Blogs') ? 'active' : ''}`}
+            >
+              Blogs
+            </Link>
+            <Link 
+              to="/contacto" 
+              className={`nav-link ${isActive('/Contacto') ? 'active' : ''}`}
+            >
+              Contacto
+            </Link>
           </nav>
 
           <div className="header-actions">
@@ -135,15 +172,15 @@ const Navbar = () => {
                     >
                       {currentUser.rol === "ADMIN" ? (
                         <>
-                          <a href="admin.html">Panel Administrador</a>
-                          <a href="envios.html">Envios realizados</a>
-                          <a href="historial.html">Historial de ventas</a>
+                          <Link to="/admin">Panel Administrador</Link>
+                          <Link to="/envios">Envios realizados</Link>
+                          <Link to="/historial">Historial de ventas</Link>
                           <a href="#" onClick={logout}>Cerrar Sesión</a>
                         </>
                       ) : (
                         <>
-                          <a href="#">Perfil</a>
-                          <a href="#">Configuración</a>
+                          <Link to="/perfil">Perfil</Link>
+                          <Link to="/configuracion">Configuración</Link>
                           <a href="#" onClick={logout}>Cerrar sesión</a>
                         </>
                       )}

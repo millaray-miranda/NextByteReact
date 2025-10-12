@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CarritoProvider } from './context/CarritoContex'; // Corregido el nombre
+import { CarritoProvider } from './context/CarritoContex';
 import Navbar from './components/Navbar';
-import Home from './pages/Home'; // Corregido: Home con H mayúscula
-import Productos from './pages/Productos'; // Corregido: Productos con P mayúscula
-import Nosotros from './pages/Nosotros'; // Corregido: Nosotros con N mayúscula
-import Contacto from './pages/Contacto'; // Corregido: Contacto con C mayúscula
+import Home from './pages/Home'; 
+import Productos from './pages/Productos';
+import Nosotros from './pages/Nosotros'; 
+import Contacto from './pages/Contacto'; 
+import Blogs from './pages/Blogs'; 
 import Footer from './components/Footer';
 import './App.css';
 
@@ -21,12 +22,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Productos />} />
               <Route path="/nosotros" element={<Nosotros />} />
-              <Route path="/blogs" element={
-                <div style={{ padding: '50px', textAlign: 'center' }}>
-                  <h1>Blogs</h1>
-                  <p>Página en construcción</p>
-                </div>
-              } />
+              <Route path="/blogs" element={<Blogs />} />
               <Route path="/contacto" element={<Contacto />} />
             </Routes>
           </main>

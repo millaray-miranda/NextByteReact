@@ -9,6 +9,7 @@ import Contacto from './pages/Contacto';
 import Blogs from './pages/Blogs';
 import Footer from './components/Footer';
 import ProductoDetalle from './pages/ProductoDetalle';
+import EntradaBlog from './pages/EntradaBlog';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path="/producto/:id" element={<ProductoDetalle />} />
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog/:slug" element={<EntradaBlog />} />
               <Route path="/contacto" element={<Contacto />} />
             </Routes>
           </main>

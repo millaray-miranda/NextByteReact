@@ -26,7 +26,7 @@ function Home() {
                         entretenimiento con los precios más competitivos del mercado.
                     </p>
                     <div className="hero-buttons">
-                        <a href="#" className="btn-primary">Ver Productos</a>
+                        <a href="" className="btn-primary">Ver Productos</a>
                         <a href="#" className="btn-secondary">Conócenos</a>
                     </div>
                 </div>
@@ -83,8 +83,8 @@ function Home() {
                             <a href="monitor.html" class="btn-producto">Ver Detalles</a>
                         </div>
                         <div class="producto-card">
-                            <img src={fotoTeclado} alt="Teclado Ajazz AK820 Pro" />
-                            <h3>ATTACK SHARK Ajazz AK820 Pro</h3>
+                            <img src={fotoTeclado} alt="Teclado Ajazz AK820" />
+                            <h3>ATTACK SHARK Ajazz AK820</h3>
                             <p class="producto-desc">Teclado mecánico 75% con switches hot-swap</p>
                             <p class="producto-precio">$99.990</p>
                             <a href="teclado.html" class="btn-producto">Ver Detalles</a>

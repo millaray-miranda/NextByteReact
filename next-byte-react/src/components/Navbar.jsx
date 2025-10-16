@@ -144,15 +144,15 @@ const Navbar = () => {
             {/* User Actions */}
             <div className="user-actions">
               {!currentUser ? (
-                <>
-                  <button className="user-link" onClick={handleShowLogin}>
+                <div className="auth-buttons">
+                  <button className="auth-link" onClick={handleShowLogin}>
                     Iniciar sesión
                   </button>
                   <span className="separator">|</span>
-                  <button className="user-link" onClick={handleShowRegister}>
+                  <button className="auth-link" onClick={handleShowRegister}>
                     Registrarse
                   </button>
-                </>
+                </div>
               ) : (
                 <div className="user-dropdown">
                   <span 

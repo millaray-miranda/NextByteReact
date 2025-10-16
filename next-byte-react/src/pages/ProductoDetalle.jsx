@@ -253,40 +253,6 @@ const ProductoDetalle = () => {
           </div>
         </div>
 
-        {/* Productos relacionados */}
-        {productosRelacionados.length > 0 && (
-          <div className="productos-relacionados">
-            <h2>Productos Relacionados</h2>
-            <div className="relacionados-grid">
-              {productosRelacionados.map(productoRel => (
-                <div key={productoRel.id} className="producto-relacionado">
-                  <Link to={`/producto/${productoRel.id}`}>
-                    <img src={productoRel.imagen} alt={productoRel.nombre} />
-                  </Link>
-                  <div className="producto-relacionado-info">
-                    <h4>
-                      <Link to={`/producto/${productoRel.id}`}>
-                        {productoRel.nombre}
-                      </Link>
-                    </h4>
-                    <p className="precio-relacionado">
-                      {formatearPrecio(productoRel.precio)}
-                      {productoRel.enOferta && (
-                        <span className="oferta-relacionada"> Oferta</span>
-                      )}
-                    </p>
-                    <button 
-                      onClick={() => navigate(`/producto/${productoRel.id}`)}
-                      className="btn-ver-detalles"
-                    >
-                      Ver Detalles
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       <Footer />

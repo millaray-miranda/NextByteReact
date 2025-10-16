@@ -4,11 +4,12 @@ export const productosData = [
     nombre: "Monitor Xiaomi G34WQi",
     precio: 195990,
     categoria: "monitores",
-    imagen: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=400&fit=crop",
+    imagen: "https://www.winpy.cl/files/39242-9674-Monitor-Gamer-Xiaomi-G34WQi-0.jpg",
     imagenes: [
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=400&fit=crop"
+      "https://www.winpy.cl/files/39242-9674-Monitor-Gamer-Xiaomi-G34WQi-0.jpg",
+      "https://www.winpy.cl/files/39242-5975-Monitor-Gamer-Xiaomi-G34WQi-2.jpg",
+      "https://www.winpy.cl/files/39242-3452-Monitor-Gamer-Xiaomi-G34WQi-3.jpg",
+      "https://www.winpy.cl/files/39242-3175-Monitor-Gamer-Xiaomi-G34WQi-1.jpg"
     ],
     descripcion: "Monitor gaming curvo de 34 pulgadas con resolución WQHD (3440x1440), tasa de refresco de 144Hz y tecnología FreeSync para una experiencia de juego inmersiva.",
     caracteristicas: [
@@ -34,13 +35,14 @@ export const productosData = [
   },
   {
     id: 2,
-    nombre: "ATTACK SHARK Ajazz AK820",
+    nombre: "Attack Shark Ajazz AK820",
     precio: 99990,
     categoria: "teclados",
-    imagen: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=400&fit=crop",
+    imagen: "https://attackshark.com/cdn/shop/files/AK820_1500.jpg?v=1752907961",
     imagenes: [
-      "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=400&fit=crop"
+      "https://attackshark.com/cdn/shop/files/AK820_1500.jpg?v=1752907961",
+      "https://attackshark.com/cdn/shop/files/9_c77954e3-60d7-472c-8adc-7b00a976a50f.jpg?v=1712669873&width=1200",
+      "https://attackshark.com/cdn/shop/files/7_ccc5e6c4-4d90-4529-8954-7b9597b46160.jpg?v=1712669872&width=1200"
     ],
     descripcion: "Teclado mecánico 75% con switches hot-swappable, iluminación RGB y construcción compacta ideal para gaming y productividad.",
     caracteristicas: [
@@ -68,10 +70,11 @@ export const productosData = [
     nombre: "Logitech G502 Hero",
     precio: 70000,
     categoria: "mouses",
-    imagen: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=400&fit=crop",
+    imagen: "https://i5.walmartimages.com/seo/Logitech-G502-Hero-High-Performance-Gaming-Mouse_b51a2aba-6b09-4c77-85fa-76e2ac27b314.c19d9599a93ec34c15310a7534a0beec.jpeg",
     imagenes: [
-      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1584670747147-4c8c95e5e7a0?w=600&h=400&fit=crop"
+      "https://i5.walmartimages.com/seo/Logitech-G502-Hero-High-Performance-Gaming-Mouse_b51a2aba-6b09-4c77-85fa-76e2ac27b314.c19d9599a93ec34c15310a7534a0beec.jpeg",
+      "https://media.falabella.com/falabellaCL/6876288_2/w=1500,h=1500,fit=pad",
+      "https://media.falabella.com/falabellaCL/6876288_img2/w=1500,h=1500,fit=pad"
     ],
     descripcion: "Mouse gaming de alto rendimiento con sensor HERO 25K, 11 botones programables y diseño ergonómico para largas sesiones de juego.",
     caracteristicas: [
@@ -100,10 +103,10 @@ export const productosData = [
     nombre: "Silla Gamer Ergonómica",
     precio: 249990,
     categoria: "sillas",
-    imagen: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=400&fit=crop",
+    imagen: "https://media.falabella.com/falabellaCL/129779744_01/w=800,h=800,fit=pad",
     imagenes: [
-      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=400&fit=crop"
+      "https://media.falabella.com/falabellaCL/129779744_01/w=800,h=800,fit=pad",
+      "https://http2.mlstatic.com/D_NQ_NP_844765-MLC50876623467_072022-O-silla-de-escritorio-gamer-chaho-pro-gamer.webp"
     ],
     descripcion: "Silla gamer ergonómica con soporte lumbar, reposacabezas ajustable y materiales de alta calidad para máximo confort durante largas sesiones.",
     caracteristicas: [
@@ -131,10 +134,11 @@ export const productosData = [
     nombre: "Auriculares HyperX Cloud II",
     precio: 89990,
     categoria: "audio",
-    imagen: "https://images.unsplash.com/photo-1584670747147-4c8c95e5e7a0?w=600&h=400&fit=crop",
+    imagen: "https://row.hyperx.com/cdn/shop/files/hyperx_cloud_ii_red_1_main.jpg?v=1737720332",
     imagenes: [
-      "https://images.unsplash.com/photo-1584670747147-4c8c95e5e7a0?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=400&fit=crop"
+      "https://row.hyperx.com/cdn/shop/files/hyperx_cloud_ii_red_1_main.jpg?v=1737720332",
+      "https://row.hyperx.com/cdn/shop/files/4-hx-usp-cloud-ii.jpg?v=1737966641&width=1200",
+      "https://row.hyperx.com/cdn/shop/files/3-hx-usp-cloud-ii.jpg?v=1737966641&width=1200"
     ],
     descripcion: "Auriculares gaming con sonido surround 7.1 virtual, micrófono desmontable con cancelación de ruido y memoria espuma viscoelástica.",
     caracteristicas: [
@@ -163,10 +167,11 @@ export const productosData = [
     nombre: "Monitor Samsung Odyssey",
     precio: 299990,
     categoria: "monitores",
-    imagen: "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=600&h=400&fit=crop",
+    imagen: "https://images.samsung.com/is/image/samsung/p6pim/cl/ls32cg552elxzs/gallery/cl-odyssey-g5-g55c-496291-ls32cg552elxzs-539931569?$684_547_PNG$",
     imagenes: [
-      "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=600&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=400&fit=crop"
+      "https://images.samsung.com/is/image/samsung/p6pim/cl/ls32cg552elxzs/gallery/cl-odyssey-g5-g55c-496291-ls32cg552elxzs-539931569?$684_547_PNG$",
+      "https://images.samsung.com/is/image/samsung/p6pim/cl/ls32cg552elxzs/gallery/cl-odyssey-g5-g55c-496291-ls32cg552elxzs-539931536?$Q90_684_547_JPG$",
+      "https://images.samsung.com/is/image/samsung/p6pim/cl/ls32cg552elxzs/gallery/cl-odyssey-g5-g55c-496291-ls32cg552elxzs-539931540?$Q90_684_547_JPG$"
     ],
     descripcion: "Monitor gaming curvo Odyssey con panel QLED, 240Hz de tasa de refresco y tecnología HDR para una experiencia visual excepcional.",
     caracteristicas: [

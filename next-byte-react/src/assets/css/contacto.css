@@ -7,10 +7,10 @@
 }
 
 .contacto-hero {
-    background: linear-gradient(rgba(74, 20, 140, 0.9), rgba(74, 20, 140, 0.9)), url('../img/fondo.png') center/cover;
+    background: linear-gradient(rgba(74, 20, 140, 0.9), rgba(74, 20, 140, 0.9));
     color: white;
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
     border-radius: 10px;
     margin-bottom: 40px;
 }

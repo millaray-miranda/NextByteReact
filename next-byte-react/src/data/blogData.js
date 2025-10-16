@@ -1,162 +1,103 @@
 export const blogPosts = [
   {
     id: 1,
-    titulo: "Guía Definitiva: Cómo Elegir el Mejor Teclado Mecánico para tus Necesidades",
     slug: "guia-teclados-mecanicos",
+    titulo: "Guía Definitiva: Cómo Elegir el Mejor Teclado Mecánico para tus Necesidades",
     autor: "Millaray Miranda",
-    fecha: "2025-08-10",
-    fechaFormateada: "10 Agosto 2025",
+    fecha: "10 Agosto 2025",
     categoria: "Tecnología",
-    imagenPortada: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&h=400&fit=crop",
+    tiempoLectura: "8 min de lectura",
+    imagenDestacada: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&h=400&fit=crop",
     imagenes: [
       "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&h=400&fit=crop"
+      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop"
     ],
-    resumen: "Los teclados mecánicos han revolucionado la experiencia de escritura y gaming. Pero con tantas opciones en el mercado, ¿cómo elegir el adecuado?",
+    descripcion: "Los teclados mecánicos han revolucionado la experiencia de escritura y gaming. Pero con tantas opciones en el mercado, ¿cómo elegir el adecuado?",
     contenido: `
-      <h2>Introducción a los Teclados Mecánicos</h2>
-      <p>Los teclados mecánicos han ganado popularidad en los últimos años, no solo entre gamers sino también entre profesionales que pasan largas horas escribiendo. Pero, ¿qué los hace tan especiales?</p>
-      
-      <h2>Tipos de Switches: El Corazón del Teclado</h2>
-      <p>Los switches son los interruptores debajo de cada tecla y determinan cómo se siente y suena el teclado al presionar las teclas. Los principales tipos son:</p>
-      
-      <h3>Switches Lineales (Red, Black)</h3>
-      <p>Ideales para gaming, ofrecen una transición suave sin feedback táctil o auditivo. Perfectos para acciones rápidas y repetitivas.</p>
-      
-      <h3>Switches Táctiles (Brown, Clear)</h3>
-      <p>Proporcionan un bump táctil al activarse, ideal para typing y gaming. Ofrecen feedback sin ser demasiado ruidosos.</p>
-      
-      <h3>Switches Clicky (Blue, Green)</h3>
-      <p>Ofrecen feedback táctil y auditivo. Excelentes para typing pero pueden ser molestos en entornos compartidos.</p>
-      
-      <h2>Factores a Considerar</h2>
+      <h2>¿Por qué Elegir un Teclado Mecánico?</h2>
+      <p>Los teclados mecánicos ofrecen una experiencia táctil superior gracias a sus interruptores individuales debajo de cada tecla. A diferencia de los teclados de membrana, proporcionan:</p>
       <ul>
-        <li><strong>Uso principal:</strong> ¿Gaming, escritura o mixto?</li>
-        <li><strong>Presupuesto:</strong> Desde opciones económicas hasta teclados premium</li>
-        <li><strong>Layout:</strong> Full-size, TKL, 75% o 60%</li>
-        <li><strong>Conectividad:</strong> Cableado vs inalámbrico</li>
-        <li><strong>Iluminación:</strong> RGB personalizable o iluminación simple</li>
+        <li>Mayor durabilidad (50-100 millones de pulsaciones)</li>
+        <li>Mejor retroalimentación táctil y auditiva</li>
+        <li>Actuación más consistente en todas las teclas</li>
+        <li>Personalización avanzada con keycaps intercambiables</li>
       </ul>
-      
-      <h2>Nuestras Recomendaciones</h2>
-      <p>Basándonos en nuestro testing, aquí están nuestras recomendaciones por categoría:</p>
-      
-      <h3>Mejor para Gaming: Razer BlackWidow V3</h3>
-      <p>Switches verdes clicky, construcción durable y RGB espectacular.</p>
-      
-      <h3>Mejor para Typing: Keychron K8</h3>
-      <p>Wireless, hot-swappable y excelente relación calidad-precio.</p>
-      
-      <h3>Mejor Presupuesto: Redragon K552</h3>
-      <p>Sorprendente calidad por menos de $60.000.</p>
-      
-      <h2>Conclusión</h2>
-      <p>Elegir el teclado mecánico perfecto depende completamente de tus necesidades específicas. Considera tu uso principal, presupuesto y preferencias personales antes de tomar una decisión.</p>
+
+      <h2>Tipos de Switches: El Corazón de tu Teclado</h2>
+      <p>La elección del switch es la decisión más importante al comprar un teclado mecánico. Existen tres categorías principales:</p>
     `,
-    tiempoLectura: "8 min",
-    tags: ["teclados", "gaming", "tecnología", "switches"],
-    destacado: true,
-    vistas: 1247
+    caracteristicas: [
+      "Switches individuales por tecla",
+      "Durabilidad superior",
+      "Retroalimentación táctil",
+      "Personalización avanzada"
+    ],
+    etiquetas: ["teclados mecánicos", "gaming", "tecnología", "periféricos"],
+    productosRecomendados: [2, 7],
+    comentarios: [
+      {
+        id: 1,
+        autor: "Carlos López",
+        fecha: "Hace 2 días",
+        contenido: "Excelente guía. Justo estaba buscando mi primer teclado mecánico y esta información es invaluable. ¿Recomiendan algún switch específico para programación?",
+        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=face"
+      },
+      {
+        id: 2,
+        autor: "María González",
+        fecha: "Hace 5 días",
+        contenido: "Llevo usando teclados mecánicos por 5 años y esta guía cubre todos los puntos importantes. Solo añadiría que los switches silent red son excelentes para oficinas.",
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      }
+    ]
   },
   {
     id: 2,
-    titulo: "Top 5 Monitores Gaming 2025: Análisis y Comparativa",
     slug: "top-monitores-gaming-2025",
+    titulo: "Top 5 Monitores Gaming 2025: Análisis y Comparativa",
     autor: "Sergio Soto",
-    fecha: "2025-09-15",
-    fechaFormateada: "15 Septiembre 2025",
+    fecha: "15 Septiembre 2025",
     categoria: "Gaming",
-    imagenPortada: "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=800&h=400&fit=crop",
+    tiempoLectura: "10 min de lectura",
+    imagenDestacada: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&h=400&fit=crop",
     imagenes: [
-      "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=800&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&h=400&fit=crop"
+      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1551649001-7a2482d98d09?w=800&h=400&fit=crop"
     ],
-    resumen: "El 2025 ha traído increíbles avances en tecnología de monitores gaming. Desde paneles OLED hasta tasas de refresco de 360Hz...",
+    descripcion: "El 2025 ha traído increíbles avances en tecnología de monitores gaming. Desde paneles OLED hasta tasas de refresco de 360Hz.",
     contenido: `
       <h2>La Evolución de los Monitores Gaming</h2>
-      <p>El mercado de monitores gaming ha experimentado una revolución en 2025, con tecnologías que antes parecían ciencia ficción ahora disponibles para consumidores.</p>
+      <p>El mercado de monitores gaming ha evolucionado rápidamente, ofreciendo tecnologías que antes solo soñábamos.</p>
       
-      <h2>#5: ASUS ROG Swift PG32UCDM</h2>
-      <p>Monitor OLED 32" con resolución 4K y 240Hz. Perfecto para quienes buscan los mejores negros y colores vibrantes.</p>
-      
-      <h2>#4: Samsung Odyssey Neo G8</h2>
-      <p>Panel VA con 240Hz y resolución 4K. Excelente relación calidad-precio en la gama alta.</p>
-      
-      <h2>#3: LG UltraGear 45GR95QE</h2>
-      <p>Curvo OLED 45" con resolución ultrawide. Inmersión total para juegos y productividad.</p>
-      
-      <h2>#2: Alienware AW3423DW</h2>
-      <p>QD-OLED de 34" con 175Hz. Calidad de imagen excepcional y buen rendimiento.</p>
-      
-      <h2>#1: Acer Predator X32 FP</h2>
-      <p>Nuestro ganador: Mini-LED 32" con 160Hz y HDR1000. Lo mejor de todos los mundos.</p>
+      <h2>Nuestro Top 5 para 2025</h2>
+      <p>Después de extensas pruebas, hemos seleccionado los 5 mejores monitores gaming del año.</p>
     `,
-    tiempoLectura: "6 min",
-    tags: ["monitores", "gaming", "tecnología", "OLED"],
-    destacado: true,
-    vistas: 892
-  },
-  {
-    id: 3,
-    titulo: "Setup Perfecto: Cómo Organizar tu Espacio de Trabajo en Casa",
-    slug: "setup-trabajo-casa",
-    autor: "Diego Sepúlveda",
-    fecha: "2025-09-22",
-    fechaFormateada: "22 Septiembre 2025",
-    categoria: "Tutoriales",
-    imagenPortada: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop",
-    imagenes: [
-      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop"
+    caracteristicas: [
+      "Tasas de refresco ultra altas",
+      "Tecnología HDR avanzada",
+      "Paneles OLED y QLED",
+      "Sincronización adaptativa"
     ],
-    resumen: "El trabajo remoto llegó para quedarse y tener un espacio de trabajo ergonómico y productivo es esencial...",
-    contenido: `
-      <h2>La Importancia de un Buen Setup</h2>
-      <p>Un espacio de trabajo bien organizado no solo mejora la productividad, sino también la salud y el bienestar.</p>
-      
-      <h2>Elementos Clave</h2>
-      <ul>
-        <li>Escritorio adecuado</li>
-        <li>Silla ergonómica</li>
-        <li>Iluminación correcta</li>
-        <li>Organización de cables</li>
-      </ul>
-    `,
-    tiempoLectura: "5 min",
-    tags: ["setup", "trabajo", "ergonomía", "productividad"],
-    destacado: false,
-    vistas: 567
+    etiquetas: ["monitores", "gaming", "tecnología", "reviews"],
+    productosRecomendados: [1, 6],
+    comentarios: []
   }
 ];
 
-// Funciones auxiliares
 export const obtenerPostPorSlug = (slug) => {
   return blogPosts.find(post => post.slug === slug);
 };
 
-export const obtenerPostPorId = (id) => {
-  return blogPosts.find(post => post.id === parseInt(id));
-};
-
-export const obtenerPostsPorCategoria = (categoria) => {
-  if (categoria === 'todos') return blogPosts;
-  return blogPosts.filter(post => post.categoria === categoria);
-};
-
-export const obtenerPostsDestacados = () => {
-  return blogPosts.filter(post => post.destacado);
-};
-
-export const obtenerPostsRelacionados = (postId, categoria, limite = 3) => {
+export const obtenerPostsRelacionados = (postActual, limite = 3) => {
   return blogPosts
-    .filter(post => post.categoria === categoria && post.id !== postId)
+    .filter(post => post.id !== postActual.id && post.categoria === postActual.categoria)
     .slice(0, limite);
 };
 
 export const categoriasBlog = [
-  { id: 'todos', nombre: 'Todos' },
-  { id: 'Tecnología', nombre: 'Tecnología' },
-  { id: 'Gaming', nombre: 'Gaming' },
-  { id: 'Reviews', nombre: 'Reviews' },
-  { id: 'Tutoriales', nombre: 'Tutoriales' },
-  { id: 'Novedades', nombre: 'Novedades' }
+  { id: 'tecnologia', nombre: 'Tecnología', cantidad: 12 },
+  { id: 'gaming', nombre: 'Gaming', cantidad: 8 },
+  { id: 'reviews', nombre: 'Reviews', cantidad: 15 },
+  { id: 'tutoriales', nombre: 'Tutoriales', cantidad: 6 },
+  { id: 'novedades', nombre: 'Novedades', cantidad: 10 }
 ];

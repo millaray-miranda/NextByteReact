@@ -62,14 +62,21 @@
     align-items: start;
 }
 
-/* Contenedor de entradas del blog */
+/* CONTENEDOR DE ENTRADAS DEL BLOG - ESPACIO AUMENTADO */
 .entradas-blog {
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 50px; /* Aumentado de 35px a 50px */
 }
 
-/* Entradas del blog - Diseño mejorado */
+/* POSTS LIST - ESPACIO AUMENTADO */
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Aumentado de 30px a 50px */
+}
+
+/* Entradas del blog - Diseño mejorado con más espacio */
 .entrada-blog {
     background: white;
     border-radius: 16px;
@@ -79,6 +86,7 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     min-height: 280px;
+    margin-bottom: 10px; /* Espacio adicional en caso necesario */
 }
 
 .entrada-blog:hover {
@@ -630,6 +638,15 @@
     .blogs-container {
         padding: 20px 15px;
     }
+    
+    /* Ajustar espacio en móvil */
+    .entradas-blog {
+        gap: 40px;
+    }
+    
+    .posts-list {
+        gap: 40px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -675,6 +692,15 @@
     .blog-stats-widget {
         grid-template-columns: 1fr;
     }
+    
+    /* Espacio en tablet */
+    .entradas-blog {
+        gap: 35px;
+    }
+    
+    .posts-list {
+        gap: 35px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -711,6 +737,15 @@
     
     .widget {
         padding: 20px;
+    }
+    
+    /* Espacio en móvil pequeño */
+    .entradas-blog {
+        gap: 30px;
+    }
+    
+    .posts-list {
+        gap: 30px;
     }
 }
 

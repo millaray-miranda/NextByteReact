@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Importa Link
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useCarrito } from "../context/CarritoContex.jsx";
+import { useCarrito } from "../context/CarritoContext.jsx";
 import { 
   productosData, 
   categoriasDisponibles 

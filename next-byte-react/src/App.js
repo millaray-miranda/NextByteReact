@@ -11,31 +11,36 @@ import Footer from './components/Footer';
 import ProductoDetalle from './pages/ProductoDetalle';
 import EntradaBlog from './pages/EntradaBlog';
 import './App.css';
+import VistaPreviaCarrito from './components/VistaPreviaCarrito'; // <-- El import está BIEN
 
 function App() {
-  return (
-    <CarritoProvider>
-      <Router>
-        <div className="App">
-          <Navbar />
+  return (
+    <CarritoProvider>
+      <Router>
+        <div className="App">
+          <Navbar />
 
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/productos" element={<Productos />} />
-              <Route path="/producto/:id" element={<ProductoDetalle />} />
-              <Route path="/nosotros" element={<Nosotros />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog/:slug" element={<EntradaBlog />} />
-              <Route path="/contacto" element={<Contacto />} />
-            </Routes>
-          </main>
+          {/* --- ¡ESTA LÍNEA FALTABA! --- */}
+          <VistaPreviaCarrito />
+          {/* --------------------------- */}
 
-          <Footer />
-        </div>
-      </Router>
-    </CarritoProvider>
-  );
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<Productos />} />
+              <Route path="/producto/:id" element={<ProductoDetalle />} />
+              <Route path="/nosotros" element={<Nosotros />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog/:slug" element={<EntradaBlog />} />
+              <Route path="/contacto" element={<Contacto />} />
+            </Routes>
+      _     </main>
+
+          <Footer />
+        </div>
+      </Router>
+    </CarritoProvider>
+  );
 }
 
 export default App;

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-// 1. IMPORTAR EL CONTEXTO
-import { useCarrito } from "../context/CarritoContext"; // <-- ¡Asegúrate que esta ruta sea correcta!
-
+import { useCarrito } from "../context/CarritoContext";
 import "../assets/css/nav-footer.css";
 import logo from "../assets/img/logo.png";
 import "../assets/css/home.css";
-import "../assets/css/inicio-sesion.css"
+import "../assets/css/inicio-sesion.css";
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -14,12 +12,11 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(null);
 
-  // Obtener la ubicación actual para resaltar el link activo
   const location = useLocation();
 
-  // 2. USAR EL CONTEXTO
-  // Obtenemos el total de items y la función para mostrar/ocultar la vista previa
-  const { totalItems, toggleCarrito } = useCarrito();
+  // Manejar posible error del contexto
+  const carritoContext = useCarrito();
+  const { totalItems = 0, toggleCarrito = () => {} } = carritoContext || {};
 
   // Cargar usuario al iniciar
   useEffect(() => {
@@ -29,36 +26,28 @@ const Navbar = () => {
     }
   }, []);
 
-  // 3. FUNCIÓN 'isActive' CORREGIDA
   const isActive = (path) => {
-    // La ruta raíz debe ser exacta
     if (path === '/') {
       return location.pathname === '/';
     }
-    // Las otras rutas deben coincidir si la URL *comienza* con ellas
-    // (ej: /productos activará /productos/1)
     return location.pathname.startsWith(path);
   };
 
-  // Mostrar modal login
   const handleShowLogin = () => {
     setShowLogin(true);
     setShowRegister(false);
   };
 
-  // Mostrar modal registro
   const handleShowRegister = () => {
     setShowRegister(true);
     setShowLogin(false);
   };
 
-  // Cerrar modales
   const closeForms = () => {
     setShowLogin(false);
     setShowRegister(false);
   };
 
-  // Manejar login
   const loginUser = (e) => {
     e.preventDefault();
     const usuario = document.getElementById("login-usuario")?.value;
@@ -85,7 +74,30 @@ const Navbar = () => {
     }
   };
 
-  // Cerrar sesión
+  const registerUser = (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById("register-nombre")?.value;
+    const email = document.getElementById("register-email")?.value;
+    const password = document.getElementById("register-password")?.value;
+
+    if (nombre && email && password) {
+      const newUser = {
+        usuario: email,
+        password: password,
+        rol: "USER",
+        nombre: nombre
+      };
+      
+      alert("Usuario registrado exitosamente");
+      closeForms();
+      // Auto-login después del registro
+      setCurrentUser(newUser);
+      localStorage.setItem("currentUser", JSON.stringify(newUser));
+    } else {
+      alert("Por favor completa todos los campos");
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("currentUser");
     setCurrentUser(null);
@@ -93,12 +105,10 @@ const Navbar = () => {
     alert("Sesión cerrada");
   };
 
-  // Toggle dropdown
   const toggleDropdown = (menuId) => {
     setShowDropdown(showDropdown === menuId ? null : menuId);
   };
 
-  // Manejar clic fuera del dropdown
   useEffect(() => {
     const handleClickOutside = () => {
       setShowDropdown(null);
@@ -118,36 +128,20 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* 4. LINKS DE NAVEGACIÓN CORREGIDOS (paths en minúscula) */}
           <nav className="main-nav">
-            <Link
-              to="/"
-              className={`nav-link ${isActive('/') ? 'active' : ''}`}
-            >
+            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
               Home
             </Link>
-            <Link
-              to="/productos" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/productos') ? 'active' : ''}`}
-            >
+            <Link to="/productos" className={`nav-link ${isActive('/productos') ? 'active' : ''}`}>
               Productos
             </Link>
-            <Link
-              to="/nosotros" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}
-            >
+            <Link to="/nosotros" className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}>
               Nosotros
             </Link>
-            <Link
-              to="/blogs" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}
-            >
+            <Link to="/blogs" className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}>
               Blogs
             </Link>
-            <Link
-              to="/contacto" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}
-            >
+            <Link to="/contacto" className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}>
               Contacto
             </Link>
           </nav>
@@ -202,30 +196,95 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* 5. BOTÓN DEL CARRITO CONECTADO */}
-            {/* 5. BOTÓN DEL CARRITO CONECTADO */}
-            <button 
-              className="cart-btn"
-              onClick={toggleCarrito} 
-            >
-              🛒 Carrito (<span>{totalItems}</span>) 
+            {/* Botón del carrito */}
+            <button className="cart-btn" onClick={toggleCarrito}>
+              🛒 Carrito (<span>{totalItems}</span>)
             </button>
           </div>
         </div>
       </div>
 
-      {/* ... (El resto de tu código de modales sigue igual) ... */}
+      {/* Overlay para modales */}
       {(showLogin || showRegister) && (
-        <div
-          className="modal-overlay"
-          onClick={closeForms}
-        ></div>
+        <div className="modal-overlay" onClick={closeForms}></div>
       )}
+
+      {/* Modal de Login */}
       <div id="login-modal" className={`modal ${showLogin ? "show" : ""}`}>
-        {/* ... (contenido modal login) ... */}
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header">
+            <h2>Iniciar Sesión</h2>
+            <button className="close-button" onClick={closeForms}>
+              ×
+            </button>
+          </div>
+          <form onSubmit={loginUser}>
+            <div className="form-group">
+              <label htmlFor="login-usuario">Usuario:</label>
+              <input 
+                type="email" 
+                id="login-usuario" 
+                placeholder="admin@admin.cl o user@user.cl"
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="login-password">Contraseña:</label>
+              <input 
+                type="password" 
+                id="login-password" 
+                placeholder="1234"
+                required 
+              />
+            </div>
+            <button type="submit" className="btn-primary">Ingresar</button>
+          </form>
+          <p className="modal-switch">
+            ¿No tienes cuenta? <button type="button" onClick={handleShowRegister}>Regístrate aquí</button>
+          </p>
+        </div>
       </div>
+
+      {/* Modal de Registro */}
       <div id="register-modal" className={`modal ${showRegister ? "show" : ""}`}>
-        {/* ... (contenido modal registro) ... */}
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header">
+            <h2>Registrarse</h2>
+            <button className="close-button" onClick={closeForms}>
+              ×
+            </button>
+          </div>
+          <form onSubmit={registerUser}>
+            <div className="form-group">
+              <label htmlFor="register-nombre">Nombre completo:</label>
+              <input 
+                type="text" 
+                id="register-nombre" 
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="register-email">Email:</label>
+              <input 
+                type="email" 
+                id="register-email" 
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="register-password">Contraseña:</label>
+              <input 
+                type="password" 
+                id="register-password" 
+                required 
+              />
+            </div>
+            <button type="submit" className="btn-primary">Registrarse</button>
+          </form>
+          <p className="modal-switch">
+            ¿Ya tienes cuenta? <button type="button" onClick={handleShowLogin}>Inicia sesión aquí</button>
+          </p>
+        </div>
       </div>
     </header>
   );

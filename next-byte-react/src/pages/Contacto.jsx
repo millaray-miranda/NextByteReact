@@ -148,10 +148,10 @@ const Contacto = () => {
             <div className="redes-sociales-contacto">
               <h3>Síguenos en:</h3>
               <div className="social-icons">
-                <a href="#" className="social-link">📘 Facebook</a>
-                <a href="#" className="social-link">📷 Instagram</a>
-                <a href="#" className="social-link">🐦 Twitter</a>
-                <a href="#" className="social-link">💼 LinkedIn</a>
+                <button type="button" className="social-link" aria-label="Facebook">📘 Facebook</button>
+                <button type="button" className="social-link" aria-label="Instagram">📷 Instagram</button>
+                <button type="button" className="social-link" aria-label="Twitter">🐦 Twitter</button>
+                <button type="button" className="social-link" aria-label="LinkedIn">💼 LinkedIn</button>
               </div>
             </div>
           </div>

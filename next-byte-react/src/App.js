@@ -49,9 +49,10 @@ function App() {
 								<Route path="/register" element={<Register />} />
 
 								{/* Rutas protegidas */}
-								<Route path="/perfil" element={<PrivateRoute element={<Perfil />} />} />
-								<Route path="/perfil/envios" element={<PrivateRoute element={<PerfilEnvios />} />} />
-								<Route path="/perfil/historial" element={<PrivateRoute element={<PerfilHistorial />} />} />
+								{/* Solo usuarios (no ADMIN) pueden ver Perfil */}
+								<Route path="/perfil" element={<PrivateRoute requiredRole="USER" element={<Perfil />} />} />
+								<Route path="/perfil/envios" element={<PrivateRoute requiredRole="USER" element={<PerfilEnvios />} />} />
+								<Route path="/perfil/historial" element={<PrivateRoute requiredRole="USER" element={<PerfilHistorial />} />} />
 								<Route path="/admin" element={<PrivateRoute requiredRole="ADMIN" element={<Admin />} />} />
 								<Route path="/envios" element={<PrivateRoute requiredRole="ADMIN" element={<Envios />} />} />
 								<Route path="/historial" element={<PrivateRoute requiredRole="ADMIN" element={<Historial />} />} />

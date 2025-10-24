@@ -33,6 +33,12 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
+  // Scope de navegación por página
+  const pathname = location.pathname || "/";
+  const inAdminArea = pathname.startsWith("/admin") || pathname.startsWith("/envios") || pathname.startsWith("/historial");
+  const inPerfilArea = pathname.startsWith("/perfil");
+  const inRoleScopedArea = inAdminArea || inPerfilArea;
+
   // Ir a página de login
   const handleShowLogin = () => {
     navigate("/login");
@@ -60,38 +66,33 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* 4. LINKS DE NAVEGACIÓN CORREGIDOS (paths en minúscula) */}
+          {/* 4. LINKS DE NAVEGACIÓN: público por defecto; si estás en páginas Admin/Perfil, mostrar menú por rol */}
           <nav className="main-nav">
-            <Link
-              to="/"
-              className={`nav-link ${isActive('/') ? 'active' : ''}`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/productos" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/productos') ? 'active' : ''}`}
-            >
-              Productos
-            </Link>
-            <Link
-              to="/nosotros" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}
-            >
-              Nosotros
-            </Link>
-            <Link
-              to="/blogs" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}
-            >
-              Blogs
-            </Link>
-            <Link
-              to="/contacto" // <-- Corregido a minúscula
-              className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}
-            >
-              Contacto
-            </Link>
+            {!inRoleScopedArea && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/productos" className={`nav-link ${isActive('/productos') ? 'active' : ''}`}>Productos</Link>
+                <Link to="/nosotros" className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}>Nosotros</Link>
+                <Link to="/blogs" className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}>Blogs</Link>
+                <Link to="/contacto" className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}>Contacto</Link>
+              </>
+            )}
+
+            {inAdminArea && currentUser?.role === "ADMIN" && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/envios" className={`nav-link ${isActive('/envios') ? 'active' : ''}`}>Envíos</Link>
+                <Link to="/historial" className={`nav-link ${isActive('/historial') ? 'active' : ''}`}>Historial</Link>
+              </>
+            )}
+
+            {inPerfilArea && currentUser?.role === "USER" && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/perfil/envios" className={`nav-link ${isActive('/perfil/envios') ? 'active' : ''}`}>Envíos</Link>
+                <Link to="/perfil/historial" className={`nav-link ${isActive('/perfil/historial') ? 'active' : ''}`}>Historial</Link>
+              </>
+            )}
           </nav>
 
           <div className="header-actions">
@@ -114,7 +115,7 @@ const Navbar = () => {
                     title={currentUser.role === "ADMIN" ? "Ir a Admin" : "Ir a Perfil"}
                     onClick={() => navigate(currentUser.role === "ADMIN" ? "/admin" : "/perfil")}
                   >
-                    {currentUser.name}
+                    {currentUser.role === "ADMIN" ? "Admin" : "Perfil"}
                   </button>
                   <span className="separator">|</span>
                   <button className="auth-link" onClick={handleLogout}>Cerrar sesión</button>

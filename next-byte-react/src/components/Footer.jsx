@@ -9,9 +9,9 @@ const Footer = () => {
           <div className="footer-left">
             <span className="site-name">Next Byte</span>
             <div className="category-links">
-              <a href="#" className="footer-link">Instagram</a>
+              <button type="button" className="footer-link" aria-label="Instagram">Instagram</button>
               <span>|</span>
-              <a href="#" className="footer-link">Facebook</a>
+              <button type="button" className="footer-link" aria-label="Facebook">Facebook</button>
             </div>
           </div>
 

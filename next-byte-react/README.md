@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Login (prototipo)
+
+Se añadió un flujo básico de autenticación con contexto.
+
+- Contexto: `src/context/AuthContext.jsx`
+- Ruta de login: `/login` (`src/pages/Login.jsx`)
+- Rutas protegidas con `src/components/PrivateRoute.jsx`
+- El `Navbar` muestra Iniciar sesión cuando no hay usuario y un menú con Cerrar sesión cuando existe.
+
+Credenciales de demo:
+
+- Admin: `admin@admin.cl` / `1234`
+- Usuario: `user@user.cl` / `1234`
+
+Rutas protegidas:
+
+- `/perfil`: requiere usuario autenticado (cualquier rol)
+- `/admin`, `/envios`, `/historial`: requieren rol `ADMIN`
+

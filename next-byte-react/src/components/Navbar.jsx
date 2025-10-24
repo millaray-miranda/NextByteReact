@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-// 1. IMPORTAR EL CONTEXTO
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+// 1. IMPORTAR CONTEXTOS
 import { useCarrito } from "../context/CarritoContext"; // <-- ¡Asegúrate que esta ruta sea correcta!
+import { useAuth } from "../context/AuthContext";
 
 import "../assets/css/nav-footer.css";
 import logo from "../assets/img/logo.png";
@@ -9,25 +10,17 @@ import "../assets/css/home.css";
 import "../assets/css/inicio-sesion.css"
 
 const Navbar = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(null);
+  const navigate = useNavigate();
 
   // Obtener la ubicación actual para resaltar el link activo
   const location = useLocation();
 
-  // 2. USAR EL CONTEXTO
+  // 2. USAR CONTEXTOS
   // Obtenemos el total de items y la función para mostrar/ocultar la vista previa
   const { totalItems, toggleCarrito } = useCarrito();
+  const { currentUser, logout } = useAuth();
 
-  // Cargar usuario al iniciar
-  useEffect(() => {
-    const savedUser = localStorage.getItem("currentUser");
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
-    }
-  }, []);
+  // Ya no cargamos usuario local aquí; lo gestiona AuthContext
 
   // 3. FUNCIÓN 'isActive' CORREGIDA
   const isActive = (path) => {
@@ -40,73 +33,22 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
-  // Mostrar modal login
+  // Ir a página de login
   const handleShowLogin = () => {
-    setShowLogin(true);
-    setShowRegister(false);
+    navigate("/login");
   };
 
-  // Mostrar modal registro
+  // Ir a página de registro (misma vista que login en modo registro)
   const handleShowRegister = () => {
-    setShowRegister(true);
-    setShowLogin(false);
-  };
-
-  // Cerrar modales
-  const closeForms = () => {
-    setShowLogin(false);
-    setShowRegister(false);
-  };
-
-  // Manejar login
-  const loginUser = (e) => {
-    e.preventDefault();
-    const usuario = document.getElementById("login-usuario")?.value;
-    const password = document.getElementById("login-password")?.value;
-
-    const admin = { usuario: "admin@admin.cl", password: "1234", rol: "ADMIN", nombre: "Administrador" };
-    const user = { usuario: "user@user.cl", password: "1234", rol: "USER", nombre: "Usuario Normal" };
-
-    let loggedInUser = null;
-
-    if (usuario === admin.usuario && password === admin.password) {
-      loggedInUser = admin;
-    } else if (usuario === user.usuario && password === user.password) {
-      loggedInUser = user;
-    }
-
-    if (loggedInUser) {
-      alert(`Bienvenido ${loggedInUser.rol}`);
-      closeForms();
-      setCurrentUser(loggedInUser);
-      localStorage.setItem("currentUser", JSON.stringify(loggedInUser));
-    } else {
-      alert("Usuario o contraseña incorrectos");
-    }
+    navigate("/register");
   };
 
   // Cerrar sesión
-  const logout = () => {
-    localStorage.removeItem("currentUser");
-    setCurrentUser(null);
-    setShowDropdown(null);
-    alert("Sesión cerrada");
+  const handleLogout = () => {
+    logout();
   };
 
-  // Toggle dropdown
-  const toggleDropdown = (menuId) => {
-    setShowDropdown(showDropdown === menuId ? null : menuId);
-  };
-
-  // Manejar clic fuera del dropdown
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setShowDropdown(null);
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+  // Dropdown removido; ahora usamos botón directo según rol
 
   return (
     <header className="header">
@@ -166,38 +108,16 @@ const Navbar = () => {
                   </button>
                 </div>
               ) : (
-                <div className="user-dropdown">
-                  <span
-                    className="user-badge"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const menuId = currentUser.rol === "ADMIN" ? "admin-menu" : "user-menu";
-                      toggleDropdown(menuId);
-                    }}
+                <div className="user-actions-authenticated">
+                  <button
+                    className="auth-link user-nav"
+                    title={currentUser.role === "ADMIN" ? "Ir a Admin" : "Ir a Perfil"}
+                    onClick={() => navigate(currentUser.role === "ADMIN" ? "/admin" : "/perfil")}
                   >
-                    👤 {currentUser.nombre} {currentUser.rol === "USER" && `(${currentUser.rol})`} ▼
-                  </span>
-                  {showDropdown && (
-                    <div
-                      className={`dropdown-menu ${showDropdown === "admin-menu" || showDropdown === "user-menu" ? "show" : ""}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {currentUser.rol === "ADMIN" ? (
-                        <>
-                          <Link to="/admin">Panel Administrador</Link>
-                          <Link to="/envios">Envios realizados</Link>
-                          <Link to="/historial">Historial de ventas</Link>
-                          <a href="#" onClick={logout}>Cerrar Sesión</a>
-                        </>
-                      ) : (
-                        <>
-                          <Link to="/perfil">Perfil</Link>
-                          <Link to="/configuracion">Configuración</Link>
-                          <a href="#" onClick={logout}>Cerrar sesión</a>
-                        </>
-                      )}
-                    </div>
-                  )}
+                    {currentUser.name}
+                  </button>
+                  <span className="separator">|</span>
+                  <button className="auth-link" onClick={handleLogout}>Cerrar sesión</button>
                 </div>
               )}
             </div>
@@ -214,19 +134,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ... (El resto de tu código de modales sigue igual) ... */}
-      {(showLogin || showRegister) && (
-        <div
-          className="modal-overlay"
-          onClick={closeForms}
-        ></div>
-      )}
-      <div id="login-modal" className={`modal ${showLogin ? "show" : ""}`}>
-        {/* ... (contenido modal login) ... */}
-      </div>
-      <div id="register-modal" className={`modal ${showRegister ? "show" : ""}`}>
-        {/* ... (contenido modal registro) ... */}
-      </div>
+      {/* Modales eliminados; usar página /login */}
     </header>
   );
 };

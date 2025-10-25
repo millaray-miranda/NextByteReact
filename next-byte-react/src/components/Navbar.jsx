@@ -7,12 +7,11 @@ import { useAuth } from "../context/AuthContext";
 import "../assets/css/nav-footer.css";
 import logo from "../assets/img/logo.png";
 import "../assets/css/home.css";
-import "../assets/css/inicio-sesion.css"
+import "../assets/css/inicio-sesion.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  // Obtener la ubicación actual para resaltar el link activo
   const location = useLocation();
 
   // 2. USAR CONTEXTOS
@@ -22,14 +21,10 @@ const Navbar = () => {
 
   // Ya no cargamos usuario local aquí; lo gestiona AuthContext
 
-  // 3. FUNCIÓN 'isActive' CORREGIDA
   const isActive = (path) => {
-    // La ruta raíz debe ser exacta
     if (path === '/') {
       return location.pathname === '/';
     }
-    // Las otras rutas deben coincidir si la URL *comienza* con ellas
-    // (ej: /productos activará /productos/1)
     return location.pathname.startsWith(path);
   };
 
@@ -123,13 +118,9 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* 5. BOTÓN DEL CARRITO CONECTADO */}
-            {/* 5. BOTÓN DEL CARRITO CONECTADO */}
-            <button 
-              className="cart-btn"
-              onClick={toggleCarrito} 
-            >
-              🛒 Carrito (<span>{totalItems}</span>) 
+            {/* Botón del carrito */}
+            <button className="cart-btn" onClick={toggleCarrito}>
+              🛒 Carrito (<span>{totalItems}</span>)
             </button>
           </div>
         </div>

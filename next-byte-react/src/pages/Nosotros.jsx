@@ -8,7 +8,6 @@ import "../assets/css/nosotros.css";
 import "../assets/css/inicio-sesion.css";
 
 // Importar imágenes
-import logoEmpresa from "../assets/img/logo.png";
 import historiaImagen from "../assets/img/imagen.jpg";
 import millaray from "../assets/img/Millaray.png";
 import sergio from "../assets/img/Sergio.png";

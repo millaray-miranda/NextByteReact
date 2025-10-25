@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useCarrito } from "../context/CarritoContext";
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+// 1. IMPORTAR CONTEXTOS
+import { useCarrito } from "../context/CarritoContext"; // <-- ¡Asegúrate que esta ruta sea correcta!
+import { useAuth } from "../context/AuthContext";
+
 import "../assets/css/nav-footer.css";
 import logo from "../assets/img/logo.png";
 import "../assets/css/home.css";
 import "../assets/css/inicio-sesion.css";
 
 const Navbar = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(null);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
-  // Manejar posible error del contexto
-  const carritoContext = useCarrito();
-  const { totalItems = 0, toggleCarrito = () => {} } = carritoContext || {};
+  // 2. USAR CONTEXTOS
+  // Obtenemos el total de items y la función para mostrar/ocultar la vista previa
+  const { totalItems, toggleCarrito } = useCarrito();
+  const { currentUser, logout } = useAuth();
 
-  // Cargar usuario al iniciar
-  useEffect(() => {
-    const savedUser = localStorage.getItem("currentUser");
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
-    }
-  }, []);
+  // Ya no cargamos usuario local aquí; lo gestiona AuthContext
 
   const isActive = (path) => {
     if (path === '/') {
@@ -33,90 +28,28 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
+  // Scope de navegación por página
+  const pathname = location.pathname || "/";
+  const inAdminArea = pathname.startsWith("/admin") || pathname.startsWith("/envios") || pathname.startsWith("/historial");
+  const inPerfilArea = pathname.startsWith("/perfil");
+  const inRoleScopedArea = inAdminArea || inPerfilArea;
+
+  // Ir a página de login
   const handleShowLogin = () => {
-    setShowLogin(true);
-    setShowRegister(false);
+    navigate("/login");
   };
 
+  // Ir a página de registro (misma vista que login en modo registro)
   const handleShowRegister = () => {
-    setShowRegister(true);
-    setShowLogin(false);
+    navigate("/register");
   };
 
-  const closeForms = () => {
-    setShowLogin(false);
-    setShowRegister(false);
+  // Cerrar sesión
+  const handleLogout = () => {
+    logout();
   };
 
-  const loginUser = (e) => {
-    e.preventDefault();
-    const usuario = document.getElementById("login-usuario")?.value;
-    const password = document.getElementById("login-password")?.value;
-
-    const admin = { usuario: "admin@admin.cl", password: "1234", rol: "ADMIN", nombre: "Administrador" };
-    const user = { usuario: "user@user.cl", password: "1234", rol: "USER", nombre: "Usuario Normal" };
-
-    let loggedInUser = null;
-
-    if (usuario === admin.usuario && password === admin.password) {
-      loggedInUser = admin;
-    } else if (usuario === user.usuario && password === user.password) {
-      loggedInUser = user;
-    }
-
-    if (loggedInUser) {
-      alert(`Bienvenido ${loggedInUser.rol}`);
-      closeForms();
-      setCurrentUser(loggedInUser);
-      localStorage.setItem("currentUser", JSON.stringify(loggedInUser));
-    } else {
-      alert("Usuario o contraseña incorrectos");
-    }
-  };
-
-  const registerUser = (e) => {
-    e.preventDefault();
-    const nombre = document.getElementById("register-nombre")?.value;
-    const email = document.getElementById("register-email")?.value;
-    const password = document.getElementById("register-password")?.value;
-
-    if (nombre && email && password) {
-      const newUser = {
-        usuario: email,
-        password: password,
-        rol: "USER",
-        nombre: nombre
-      };
-      
-      alert("Usuario registrado exitosamente");
-      closeForms();
-      // Auto-login después del registro
-      setCurrentUser(newUser);
-      localStorage.setItem("currentUser", JSON.stringify(newUser));
-    } else {
-      alert("Por favor completa todos los campos");
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem("currentUser");
-    setCurrentUser(null);
-    setShowDropdown(null);
-    alert("Sesión cerrada");
-  };
-
-  const toggleDropdown = (menuId) => {
-    setShowDropdown(showDropdown === menuId ? null : menuId);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setShowDropdown(null);
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+  // Dropdown removido; ahora usamos botón directo según rol
 
   return (
     <header className="header">
@@ -128,22 +61,33 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* 4. LINKS DE NAVEGACIÓN: público por defecto; si estás en páginas Admin/Perfil, mostrar menú por rol */}
           <nav className="main-nav">
-            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
-              Home
-            </Link>
-            <Link to="/productos" className={`nav-link ${isActive('/productos') ? 'active' : ''}`}>
-              Productos
-            </Link>
-            <Link to="/nosotros" className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}>
-              Nosotros
-            </Link>
-            <Link to="/blogs" className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}>
-              Blogs
-            </Link>
-            <Link to="/contacto" className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}>
-              Contacto
-            </Link>
+            {!inRoleScopedArea && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/productos" className={`nav-link ${isActive('/productos') ? 'active' : ''}`}>Productos</Link>
+                <Link to="/nosotros" className={`nav-link ${isActive('/nosotros') ? 'active' : ''}`}>Nosotros</Link>
+                <Link to="/blogs" className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}>Blogs</Link>
+                <Link to="/contacto" className={`nav-link ${isActive('/contacto') ? 'active' : ''}`}>Contacto</Link>
+              </>
+            )}
+
+            {inAdminArea && currentUser?.role === "ADMIN" && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/envios" className={`nav-link ${isActive('/envios') ? 'active' : ''}`}>Envíos</Link>
+                <Link to="/historial" className={`nav-link ${isActive('/historial') ? 'active' : ''}`}>Historial</Link>
+              </>
+            )}
+
+            {inPerfilArea && currentUser?.role === "USER" && (
+              <>
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                <Link to="/perfil/envios" className={`nav-link ${isActive('/perfil/envios') ? 'active' : ''}`}>Envíos</Link>
+                <Link to="/perfil/historial" className={`nav-link ${isActive('/perfil/historial') ? 'active' : ''}`}>Historial</Link>
+              </>
+            )}
           </nav>
 
           <div className="header-actions">
@@ -160,38 +104,16 @@ const Navbar = () => {
                   </button>
                 </div>
               ) : (
-                <div className="user-dropdown">
-                  <span
-                    className="user-badge"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const menuId = currentUser.rol === "ADMIN" ? "admin-menu" : "user-menu";
-                      toggleDropdown(menuId);
-                    }}
+                <div className="user-actions-authenticated">
+                  <button
+                    className="auth-link user-nav"
+                    title={currentUser.role === "ADMIN" ? "Ir a Admin" : "Ir a Perfil"}
+                    onClick={() => navigate(currentUser.role === "ADMIN" ? "/admin" : "/perfil")}
                   >
-                    👤 {currentUser.nombre} {currentUser.rol === "USER" && `(${currentUser.rol})`} ▼
-                  </span>
-                  {showDropdown && (
-                    <div
-                      className={`dropdown-menu ${showDropdown === "admin-menu" || showDropdown === "user-menu" ? "show" : ""}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {currentUser.rol === "ADMIN" ? (
-                        <>
-                          <Link to="/admin">Panel Administrador</Link>
-                          <Link to="/envios">Envios realizados</Link>
-                          <Link to="/historial">Historial de ventas</Link>
-                          <a href="#" onClick={logout}>Cerrar Sesión</a>
-                        </>
-                      ) : (
-                        <>
-                          <Link to="/perfil">Perfil</Link>
-                          <Link to="/configuracion">Configuración</Link>
-                          <a href="#" onClick={logout}>Cerrar sesión</a>
-                        </>
-                      )}
-                    </div>
-                  )}
+                    {currentUser.role === "ADMIN" ? "Admin" : "Perfil"}
+                  </button>
+                  <span className="separator">|</span>
+                  <button className="auth-link" onClick={handleLogout}>Cerrar sesión</button>
                 </div>
               )}
             </div>
@@ -204,88 +126,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Overlay para modales */}
-      {(showLogin || showRegister) && (
-        <div className="modal-overlay" onClick={closeForms}></div>
-      )}
-
-      {/* Modal de Login */}
-      <div id="login-modal" className={`modal ${showLogin ? "show" : ""}`}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-header">
-            <h2>Iniciar Sesión</h2>
-            <button className="close-button" onClick={closeForms}>
-              ×
-            </button>
-          </div>
-          <form onSubmit={loginUser}>
-            <div className="form-group">
-              <label htmlFor="login-usuario">Usuario:</label>
-              <input 
-                type="email" 
-                id="login-usuario" 
-                placeholder="admin@admin.cl o user@user.cl"
-                required 
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="login-password">Contraseña:</label>
-              <input 
-                type="password" 
-                id="login-password" 
-                placeholder="1234"
-                required 
-              />
-            </div>
-            <button type="submit" className="btn-primary">Ingresar</button>
-          </form>
-          <p className="modal-switch">
-            ¿No tienes cuenta? <button type="button" onClick={handleShowRegister}>Regístrate aquí</button>
-          </p>
-        </div>
-      </div>
-
-      {/* Modal de Registro */}
-      <div id="register-modal" className={`modal ${showRegister ? "show" : ""}`}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-header">
-            <h2>Registrarse</h2>
-            <button className="close-button" onClick={closeForms}>
-              ×
-            </button>
-          </div>
-          <form onSubmit={registerUser}>
-            <div className="form-group">
-              <label htmlFor="register-nombre">Nombre completo:</label>
-              <input 
-                type="text" 
-                id="register-nombre" 
-                required 
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="register-email">Email:</label>
-              <input 
-                type="email" 
-                id="register-email" 
-                required 
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="register-password">Contraseña:</label>
-              <input 
-                type="password" 
-                id="register-password" 
-                required 
-              />
-            </div>
-            <button type="submit" className="btn-primary">Registrarse</button>
-          </form>
-          <p className="modal-switch">
-            ¿Ya tienes cuenta? <button type="button" onClick={handleShowLogin}>Inicia sesión aquí</button>
-          </p>
-        </div>
-      </div>
+      {/* Modales eliminados; usar página /login */}
     </header>
   );
 };
